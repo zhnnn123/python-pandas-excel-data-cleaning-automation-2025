@@ -4,7 +4,7 @@ from openpyxl.utils import get_column_letter
 
 df = pd.read_excel("dirty_sales_data.xlsx")
 
-# 改成纯英文列名（Upwork 客户最爱）
+
 df = df.rename(columns={
     'OrderID': 'Order ID',
     'Customer': 'Customer Name',
@@ -30,8 +30,7 @@ df['Email'] = df['Email'].fillna('No Email')
 # 日期格式化 + 金额取整（超级专业！）
 df['Order Date'] = pd.to_datetime(df['Order Date'], errors='coerce')
 df['Amount'] = df['Amount'].astype(int)
-
-# ======== Day1 作业部分 ========
+
 df = df[df['Amount'] >= 100]
 df['Is Big Order'] = df['Amount'].apply(lambda x: 'Yes' if x > 1000 else 'No')
 df = df.sort_values(by='Amount', ascending=False)
@@ -69,4 +68,4 @@ with pd.ExcelWriter("FINAL_PROFESSIONAL_Sales_Report_Nov2025.xlsx", engine='open
     # for row in ws['F2:F{}'.format(ws.max_row)]:
     #     row[0].number_format = '$#,##0'
 
-print("Day1 终极版完成！客户看了直接给你小费的那种！")
+print("day1完成")
